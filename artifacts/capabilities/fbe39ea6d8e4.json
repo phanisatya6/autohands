@@ -1,0 +1,144 @@
+{
+  "id": "fbe39ea6d8e4",
+  "name": "pay-bill",
+  "description": "Make a payment of 250.00 MYR from the Zara account using the Pay Now flow, without submitting personal data.",
+  "schema_version": 1,
+  "version": "1.0.0",
+  "created_at": 1789255716580902200,
+  "updated_at": 1789255716580902200,
+  "source_goal": "Make a payment of 250.00 MYR from the Zara account using the Pay Now flow, without submitting personal data.",
+  "surface": {
+    "kind": "web",
+    "base_url": "http://127.0.0.1:53881",
+    "entry_path": "/",
+    "user_agent": ""
+  },
+  "parameters": [
+    {
+      "name": "amount",
+      "type": "decimal",
+      "required": true,
+      "description": "Payment amount",
+      "sensitive": false
+    }
+  ],
+  "steps": [
+    {
+      "id": "1e19231e6d46",
+      "description": "continue to dashboard from the legacy gate",
+      "action": "click",
+      "locator": {
+        "strategy": "text",
+        "value": "Proceed",
+        "fallbacks": [],
+        "reason": "stable accessible text observed during discovery"
+      },
+      "args": {},
+      "on_error": {
+        "disposition": "recoverable",
+        "guard": "",
+        "on_transient": 15,
+        "expected_texts": []
+      },
+      "checkpoint": ""
+    },
+    {
+      "id": "b5634db4a125",
+      "description": "start a payment",
+      "action": "click",
+      "locator": {
+        "strategy": "text",
+        "value": "Pay Now",
+        "fallbacks": [],
+        "reason": "stable accessible text observed during discovery"
+      },
+      "args": {},
+      "on_error": {
+        "disposition": "recoverable",
+        "guard": "",
+        "on_transient": 3,
+        "expected_texts": []
+      },
+      "checkpoint": ""
+    },
+    {
+      "id": "f6cf9b2e3ac7",
+      "description": "enter payment amount",
+      "action": "fill",
+      "locator": {
+        "strategy": "text",
+        "value": "Amount",
+        "fallbacks": [],
+        "reason": "stable accessible text observed during discovery"
+      },
+      "args": {
+        "text": "{param.amount}"
+      },
+      "on_error": {
+        "disposition": "recoverable",
+        "guard": "",
+        "on_transient": 3,
+        "expected_texts": []
+      },
+      "checkpoint": ""
+    },
+    {
+      "id": "fc159d22df09",
+      "description": "authorize the payment",
+      "action": "click",
+      "locator": {
+        "strategy": "text",
+        "value": "Authorize Payment",
+        "fallbacks": [],
+        "reason": "stable accessible text observed during discovery"
+      },
+      "args": {},
+      "on_error": {
+        "disposition": "recoverable",
+        "guard": "",
+        "on_transient": 3,
+        "expected_texts": []
+      },
+      "checkpoint": ""
+    }
+  ],
+  "outputs": [],
+  "checkpoint": {
+    "kind": "text",
+    "value": "Payment sent",
+    "timeout_ms": 15000
+  },
+  "business_outcomes": [
+    {
+      "label": "payment declined: account closed",
+      "expected_texts": [
+        "Payment declined"
+      ]
+    },
+    {
+      "label": "payment declined: account closed",
+      "expected_texts": [
+        "Payment declined"
+      ]
+    }
+  ],
+  "security": {
+    "allowed_domains": [
+      "127.0.0.1"
+    ],
+    "allowed_domains_are_suffixes": true,
+    "allowed_actions": [
+      "navigate",
+      "fill",
+      "click",
+      "select",
+      "press",
+      "wait_for",
+      "aggregate_extract"
+    ],
+    "max_steps": 40,
+    "risk_policy": {},
+    "sensitive_param_names": []
+  },
+  "tenant_overrides": []
+}

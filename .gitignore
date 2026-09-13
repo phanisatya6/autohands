@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+playwright-report/
+test-results/
+artifacts/runs/*/
+!artifacts/runs/.gitkeep
+.DS_Store
+autohands.egg-info/
+escalations/

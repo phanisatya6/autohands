@@ -1,0 +1,90 @@
+{
+  "id": "d88c0eadf71f",
+  "name": "check-balance",
+  "description": "Read the currently available balance shown on the dashboard page and report it.",
+  "schema_version": 1,
+  "version": "1.0.0",
+  "created_at": 1789255712038306500,
+  "updated_at": 1789255712038306500,
+  "source_goal": "Read the currently available balance shown on the dashboard page and report it.",
+  "surface": {
+    "kind": "web",
+    "base_url": "http://127.0.0.1:53881",
+    "entry_path": "/",
+    "user_agent": ""
+  },
+  "parameters": [],
+  "steps": [
+    {
+      "id": "3716f1abde69",
+      "description": "continue to dashboard from the legacy gate",
+      "action": "click",
+      "locator": {
+        "strategy": "text",
+        "value": "Proceed",
+        "fallbacks": [],
+        "reason": "stable accessible text observed during discovery"
+      },
+      "args": {},
+      "on_error": {
+        "disposition": "recoverable",
+        "guard": "",
+        "on_transient": 15,
+        "expected_texts": []
+      },
+      "checkpoint": ""
+    }
+  ],
+  "outputs": [
+    {
+      "name": "available_balance",
+      "type": "text",
+      "locator": {
+        "strategy": "table_cell",
+        "value": "Available Balance:",
+        "fallbacks": [],
+        "reason": "row header prefix; value cell read fresh at replay time"
+      },
+      "attribute": "text",
+      "description": "read available balance"
+    }
+  ],
+  "checkpoint": {
+    "kind": "text",
+    "value": "RM",
+    "timeout_ms": 15000
+  },
+  "business_outcomes": [
+    {
+      "label": "balance service temporarily unavailable",
+      "expected_texts": [
+        "Balance temporarily unavailable"
+      ]
+    },
+    {
+      "label": "balance service temporarily unavailable",
+      "expected_texts": [
+        "Balance temporarily unavailable"
+      ]
+    }
+  ],
+  "security": {
+    "allowed_domains": [
+      "127.0.0.1"
+    ],
+    "allowed_domains_are_suffixes": true,
+    "allowed_actions": [
+      "navigate",
+      "fill",
+      "click",
+      "select",
+      "press",
+      "wait_for",
+      "aggregate_extract"
+    ],
+    "max_steps": 40,
+    "risk_policy": {},
+    "sensitive_param_names": []
+  },
+  "tenant_overrides": []
+}

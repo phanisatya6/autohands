@@ -1,0 +1,26 @@
+[project]
+name = "autohands"
+version = "0.1.0"
+description = "Computer-use automation: an LLM discovers how to drive a UI with no API, records a reusable capability, and replays it deterministically with no model in the loop."
+requires-python = ">=3.11"
+dependencies = [
+    "playwright>=1.40",
+    "flask>=3.0",
+    "openai>=1.30",
+    "python-dotenv>=1.0",
+    "pydantic>=2.5",
+]
+
+[project.scripts]
+autohands = "autohands.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["autohands*", "demo_app*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

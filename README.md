@@ -54,8 +54,8 @@ python -m autohands run-demo   --operator-mode auto
 ```
 
 - `discover` — run the live agent. `--dry-run` uses the scripted brain; otherwise it calls OpenAI
-  (`OPENAI_API_KEY` in `.env`, `OPENAI_DRY_RUN=1` forces the scripted brain). A real discovery
-  produces screenshots + reasoning steps as evidence in the run directory.
+  (key via `OPENAI_API_KEY`). The agent reasons over a page screenshot each turn and logs every
+  decision to the run's `trace.jsonl`, so a discovery is reproducible evidence, not telemetry.
 - `replay` — deterministic replay of a published capability. `--operator auto|file|console`
   chooses who answers escalation tickets (auto-approve in a sandbox, a file-backed queue consumed
   by the operator console, or interactive console).
